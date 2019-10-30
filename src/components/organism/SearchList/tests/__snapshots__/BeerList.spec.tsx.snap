@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BeerList Enzyme testing Matches the snapshot with beer List 1`] = `
+<div
+  className="cards"
+>
+  <div
+    className="loader"
+  >
+    Loading...
+  </div>
+</div>
+`;
+
+exports[`BeerList Enzyme testing Matches the snapshot without beer list 1`] = `
+<div
+  className="cards"
+>
+  <div
+    className="card"
+  >
+    <a
+      href="/1"
+      onClick={[Function]}
+      title="Buzz"
+    >
+      <div>
+        <img
+          alt="A Real Bitter Experience."
+          height="250"
+          src="https://images.punkapi.com/v2/keg.png"
+          width="150"
+        />
+      </div>
+      <div>
+        <h2>
+          Buzz
+        </h2>
+        <div>
+          A Real Bitter Experience.
+        </div>
+        <div>
+          20
+           
+          litres
+        </div>
+      </div>
+    </a>
+  </div>
+  <div
+    className="card"
+  >
+    <a
+      href="/2"
+      onClick={[Function]}
+      title="Buzz 2"
+    >
+      <div>
+        <img
+          alt="A Real Bitter Experience."
+          height="250"
+          src="https://images.punkapi.com/v2/keg.png"
+          width="150"
+        />
+      </div>
+      <div>
+        <h2>
+          Buzz 2
+        </h2>
+        <div>
+          A Real Bitter Experience.
+        </div>
+        <div>
+          20
+           
+          litres
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+`;

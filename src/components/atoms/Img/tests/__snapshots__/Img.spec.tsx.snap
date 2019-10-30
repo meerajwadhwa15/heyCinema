@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Image Snapshot testing Matches the snapshot 1`] = `
+<img
+  alt="credit card"
+  height="200"
+  src="https://images.punkapi.com/v2/keg.png"
+  width="200"
+/>
+`;

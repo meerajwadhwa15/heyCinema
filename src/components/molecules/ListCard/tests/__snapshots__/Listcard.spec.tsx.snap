@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListCard Snapshot testing Matches the snapshot 1`] = `
+<div
+  className="card"
+>
+  <a
+    href="/1"
+    onClick={[Function]}
+    title="Buzz"
+  >
+    <div>
+      <img
+        alt="A Real Bitter Experience."
+        height="250"
+        src="https://images.punkapi.com/v2/keg.png"
+        width="150"
+      />
+    </div>
+    <div>
+      <h2>
+        Buzz
+      </h2>
+      <div>
+        A Real Bitter Experience.
+      </div>
+      <div>
+        20
+         
+        litres
+      </div>
+    </div>
+  </a>
+</div>
+`;
