@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchForm Snapshot testing Matches the snapshot 1`] = `
+<div
+  className="search-form"
+>
+  <form>
+    <input
+      onBlur={[Function]}
+      onChange={[Function]}
+      onKeyDown={[Function]}
+      placeholder="Search"
+      type="text"
+      value=""
+    />
+  </form>
+</div>
+`;

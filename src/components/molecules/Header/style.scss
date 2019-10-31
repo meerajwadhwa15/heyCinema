@@ -1,0 +1,14 @@
+header.header {
+  background: $secondaryBackgroundColor;
+  display: flex;
+  padding: 10px;
+  margin-bottom: 20px;
+
+  h1 > div {
+    color: $primaryColor;
+
+    &:last-child {
+      color: $secondaryColor;
+    }
+  }
+}

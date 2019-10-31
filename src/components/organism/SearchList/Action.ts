@@ -10,7 +10,7 @@ export const isFetching = (isFetching: boolean): SetFetch => {
   return { type: 'SET_FETCHING', isFetching };
 };
 
-export const FetchBeers = (searchString: string) => {
+export const FetchSearchList = (searchString: string) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
     const showLoader: SetFetch = isFetching(true);
     dispatch(showLoader);
@@ -23,18 +23,18 @@ export const FetchBeers = (searchString: string) => {
 
     return Fetch(serverProps)
       .then((response: AxiosResponse) => {
-        const fetchBeersSuccess: FetchSuccessActionType = {
+        const fetchSuccess: FetchSuccessActionType = {
           type: 'FETCH_MOVIES_SUCCESS',
           list: response.data.Search || []
         };
-        dispatch(fetchBeersSuccess);
+        dispatch(fetchSuccess);
       })
       .catch((err: AxiosError) => {
-        const fetchBeersSuccess: FetchErrorActionType = {
+        const fetchError: FetchErrorActionType = {
           type: 'FETCH_MOVIES_ERROR',
           message: ERROR_MESSAGE
         };
-        dispatch(fetchBeersSuccess);
+        dispatch(fetchError);
       })
       .finally(() => {
         const hideLoader: SetFetch = isFetching(false);

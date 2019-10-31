@@ -7,7 +7,7 @@ export const initialState: ReducerState = {
   errorMessage: ''
 };
 
-const BeerListReducer: Reducer<ReducerState, ReducerAction> = (
+const SearchListReducer: Reducer<ReducerState, ReducerAction> = (
   state = initialState,
   action
 ) => {
@@ -23,4 +23,4 @@ const BeerListReducer: Reducer<ReducerState, ReducerAction> = (
   }
 };
 
-export default BeerListReducer;
+export default SearchListReducer;

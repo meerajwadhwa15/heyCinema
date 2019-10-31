@@ -2,7 +2,7 @@ import React, { ReactNode, Component, Fragment, SyntheticEvent } from 'react';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import ListCard from '../../molecules/ListCard';
-import SearchInput from './../../molecules/SearchInput';
+import SearchForm from './../../molecules/SearchForm';
 import {
   listType,
   ComponentState,
@@ -11,11 +11,10 @@ import {
   DispatchProps,
   ComponentProps
 } from './type';
-import { FetchBeers } from './Action';
+import { FetchSearchList } from './Action';
 import Loader from '../../molecules/Loader';
 import ErrorMessage from '../../atoms/ErrorMessage';
 import NoRecordFound from '../../atoms/NoRecordFound';
-import './Style.css';
 
 export const mapStateToProps = ({
   SearchListReducer: { list, isFetching, errorMessage }
@@ -29,7 +28,7 @@ export const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
   fetchSearchListAction: (searchString: string) => {
-    dispatch(FetchBeers(searchString));
+    dispatch(FetchSearchList(searchString));
   }
 });
 
@@ -40,10 +39,11 @@ export class SearchList extends Component<Props, ComponentState> {
     list: []
   };
 
-  handleSearch(e: SyntheticEvent) {
-    e.preventDefault();
-    const { fetchSearchListAction } = this.props;
-    this.props.fetchSearchListAction('star');
+  handleSearch(value: string) {
+    if (value) {
+      const { fetchSearchListAction } = this.props;
+      fetchSearchListAction(value);
+    }
   }
 
   render(): ReactNode {
@@ -51,8 +51,7 @@ export class SearchList extends Component<Props, ComponentState> {
 
     return (
       <Fragment>
-        <SearchInput searchResults={this.handleSearch.bind(this)} />
-
+        <SearchForm searchResults={this.handleSearch.bind(this)} />
         <div className="cards">
           {isFetching ? (
             <Loader />

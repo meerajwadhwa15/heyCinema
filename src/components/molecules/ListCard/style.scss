@@ -1,0 +1,25 @@
+.card {
+  background: $secondaryBackgroundColor;
+  margin-bottom: 15px;
+
+  &:hover {
+  }
+
+  h3 {
+    color: $primaryColor;
+  }
+
+  a {
+    display: flex;
+    text-decoration: none;
+    color: $secondaryColor;
+
+    > div:last-child {
+      padding: 15px;
+    }
+  }
+
+  p {
+    margin-top: 15px;
+  }
+}

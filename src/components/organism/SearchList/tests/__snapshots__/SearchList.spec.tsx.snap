@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchList Enzyme testing Matches the snapshot with search List 1`] = `
+Array [
+  <div
+    className="search-form"
+  >
+    <form>
+      <input
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder="Search"
+        type="text"
+        value=""
+      />
+    </form>
+  </div>,
+  <div
+    className="cards"
+  >
+    <div
+      className="loader"
+    >
+      Loading...
+    </div>
+  </div>,
+]
+`;
+
+exports[`SearchList Enzyme testing Matches the snapshot without search list 1`] = `
+Array [
+  <div
+    className="search-form"
+  >
+    <form>
+      <input
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder="Search"
+        type="text"
+        value=""
+      />
+    </form>
+  </div>,
+  <div
+    className="cards"
+  >
+    <article
+      className="card"
+    >
+      <a
+        href="/1"
+        onClick={[Function]}
+        title="Title 1"
+      >
+        <div>
+          <img
+            alt="Title 1"
+            src="Poster_1"
+            width="200"
+          />
+        </div>
+        <div>
+          <h3>
+            Title 1
+          </h3>
+          <p>
+            Type 1
+          </p>
+          <p>
+            2019
+          </p>
+        </div>
+      </a>
+    </article>
+    <article
+      className="card"
+    >
+      <a
+        href="/2"
+        onClick={[Function]}
+        title="Title 2"
+      >
+        <div>
+          <img
+            alt="Title 2"
+            src="Poster_2"
+            width="200"
+          />
+        </div>
+        <div>
+          <h3>
+            Title 2
+          </h3>
+          <p>
+            Type 2
+          </p>
+          <p>
+            2020
+          </p>
+        </div>
+      </a>
+    </article>
+  </div>,
+]
+`;

@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import Img from './../../atoms/Img';
 import Anchor from './../../atoms/Anchor';
-import './Style.css';
 
 export type Props = {
   item: {
@@ -14,18 +13,18 @@ export type Props = {
 };
 
 const BeerList: FunctionComponent<Props> = ({ item }) => (
-  <div className="card">
+  <article className="card">
     <Anchor url={`/${item.imdbID}`} title={item.Title}>
       <div>
-        <Img src={item.Poster} height="250" width="150" alt={item.Title} />
+        <Img src={item.Poster} width="200" alt={item.Title} />
       </div>
       <div>
-        <h2>{item.Title}</h2>
-        <div>{item.Year}</div>
-        <div>{item.Type}</div>
+        <h3>{item.Title}</h3>
+        <p>{item.Type}</p>
+        <p>{item.Year}</p>
       </div>
     </Anchor>
-  </div>
+  </article>
 );
 
 export default BeerList;

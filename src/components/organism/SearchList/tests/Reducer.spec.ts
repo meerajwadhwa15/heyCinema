@@ -1,63 +1,56 @@
-import Reducers, { initialState } from './../Reducers'
-import { ERROR_MESSAGE } from './../../../../config/message'
+import Reducers, { initialState } from './../Reducers';
+import { ERROR_MESSAGE } from './../../../../config/message';
 import {
   listType,
   SetFetch,
   FetchErrorActionType,
   FetchSuccessActionType,
-  ReducerAction,
-} from './../type'
+  ReducerAction
+} from './../type';
 
 const setFetchAsLoading = {
   type: 'SET_FETCHING',
-  isFetching: true,
-}
+  isFetching: true
+};
 const setFetchAsNotLoading = {
   type: 'SET_FETCHING',
-  isFetching: false,
-}
+  isFetching: false
+};
 
 const fetchSuccessAction = {
   type: 'FETCH_MOVIES_SUCCESS',
-  list: [],
-}
+  list: []
+};
 
 const fetchErrorAction = {
   type: 'FETCH_MOVIES_ERROR',
-  message: ERROR_MESSAGE,
-}
+  message: ERROR_MESSAGE
+};
 
-describe('BeerList Reducers Unit test', function() {
-  let state = {}
+describe('SearchList Reducers Unit test', function() {
+  let state = {};
   test('should return the initial state', () => {
-    expect(Reducers(initialState, { type: '' })).toEqual(initialState)
-  })
+    expect(Reducers(initialState, { type: '' })).toEqual(initialState);
+  });
 
-  test('should handle "FETCH_BEERS" action', () => {
+  test('should handle "FETCH_MOVIES_SUCCESS" action', () => {
     expect(Reducers(initialState, fetchSuccessAction)).toEqual({
       ...initialState,
-      list: [],
-    })
-  })
+      list: []
+    });
+  });
 
   test('should handle "SET_FETCHING" action with true', () => {
     expect(Reducers(initialState, setFetchAsLoading)).toEqual({
       ...initialState,
-      isFetching: true,
-    })
-  })
+      isFetching: true
+    });
+  });
 
   test('should handle "SET_FETCHING" action with false', () => {
     expect(Reducers(initialState, setFetchAsNotLoading)).toEqual({
       ...initialState,
-      isFetching: false,
-    })
-  })
-
-  test('should handle "FETCH_BEER_DETAIL_ERROR" action with true', () => {
-    expect(Reducers(initialState, fetchErrorAction)).toEqual({
-      ...initialState,
-      errorMessage: ERROR_MESSAGE,
-    })
-  })
-})
+      isFetching: false
+    });
+  });
+});

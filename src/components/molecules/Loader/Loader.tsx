@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react'
-import './style.css'
 
 export type Props = {}
 
