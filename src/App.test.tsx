@@ -1,8 +1,12 @@
 import React from 'react';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import { renderWithRouter, fireEvent, waitForElement } from './test-utils';
+import {
+  renderWithRouter,
+  fireEvent,
+  waitForElement
+} from './../config/test-utils';
 import App from './App';
 
 const mockStore = configureMockStore();

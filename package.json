@@ -71,7 +71,9 @@
     "webpack": "4.41.0",
     "webpack-dev-server": "3.2.1",
     "webpack-manifest-plugin": "2.1.1",
-    "workbox-webpack-plugin": "4.3.1"
+    "workbox-webpack-plugin": "4.3.1",
+    "react-router-dom": "^5.1.2",
+    "node-sass": "^4.13.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
@@ -95,6 +97,7 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@testing-library/dom": "^6.10.0",
     "@testing-library/react": "^9.3.1",
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",
@@ -103,10 +106,9 @@
     "axios-mock-adapter": "^1.17.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
-    "node-sass": "^4.13.0",
-    "react-router-dom": "^5.1.2",
     "react-test-renderer": "^16.11.0",
-    "redux-mock-store": "^1.5.3"
+    "redux-mock-store": "^1.5.3",
+    "ts-jest": "^24.1.0"
   },
   "jest": {
     "roots": [
@@ -162,5 +164,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "engines": {
+    "node": ">=10.14.2"
   }
 }
