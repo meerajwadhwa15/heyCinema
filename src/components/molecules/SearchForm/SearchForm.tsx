@@ -10,10 +10,11 @@ const SearchForm: FunctionComponent<Props> = ({ searchResults }) => (
     <form>
       <DebounceInput
         placeholder="Search"
-        minLength={2}
+        minLength={3}
         debounceTimeout={300}
         onChange={event => searchResults(event.target.value)}
       />
+      <p>Minimum 3 characters</p>
     </form>
   </div>
 );

@@ -16,7 +16,7 @@ const BeerList: FunctionComponent<Props> = ({ item }) => (
   <article className="card">
     <Anchor url={`/${item.imdbID}`} title={item.Title}>
       <div>
-        <Img src={item.Poster} width="200" alt={item.Title} />
+        <Img src={item.Poster} alt={item.Title} />
       </div>
       <div>
         <h3>{item.Title}</h3>

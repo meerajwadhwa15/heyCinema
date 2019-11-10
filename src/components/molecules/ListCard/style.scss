@@ -1,8 +1,11 @@
 .card {
   background: $secondaryBackgroundColor;
   margin-bottom: 15px;
+  border: 1px solid $tertiaryColor;
+  border-radius: 10px;
 
   &:hover {
+    background: $hoverEffectColor;
   }
 
   h3 {
@@ -11,11 +14,46 @@
 
   a {
     display: flex;
+    flex-direction: column;
     text-decoration: none;
     color: $secondaryColor;
 
     > div:last-child {
       padding: 15px;
+      border-top: 1px solid $primaryBackgroundColor;
+    }
+
+    > div:first-child {
+      border-radius: 10px 0 0 10px;
+      text-align: center;
+    }
+
+    img {
+      max-height: 400px;
+      width: auto;
+      height: auto;
+    }
+
+    @media only screen and (min-width: $min-sm-screen) {
+      flex-direction: row;
+
+      > div:first-child {
+        overflow: hidden;
+      }
+
+      > div:last-child {
+        border-top: none;
+      }
+
+      img {
+        width: 180px;
+        height: 250px;
+
+        &:hover {
+          transition: transform 0.5s ease;
+          transform: scale(1.1);
+        }
+      }
     }
   }
 

@@ -1,4 +1,4 @@
-import { isFetching, FetchSearchList } from './../Action';
+import { isFetching, FetchSearchList, LoadMoreSearchList } from './../Action';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
@@ -11,6 +11,7 @@ import {
   FetchSuccessActionType
 } from './../type';
 import { SEARCH_MOVIES } from './../../../../config/api';
+import { Types } from './../Constants';
 
 const mock = new MockAdapter(axios);
 
@@ -36,7 +37,7 @@ const list: listType[] = [
 
 const setFetchAsLoading: SetFetch = { type: 'SET_FETCHING', isFetching: true };
 const setFetchAsNotLoading: SetFetch = {
-  type: 'SET_FETCHING',
+  type: Types.SET_FETCHING,
   isFetching: false
 };
 
@@ -47,15 +48,15 @@ describe('SearchList Action Unit test', function() {
   });
 
   it('should create an action with correct type SearchList `HAPPY SCENARIO`', () => {
-    mock.onGet(SEARCH_MOVIES).reply(200, { Search: list });
+    mock.onGet(SEARCH_MOVIES).reply(200, { Response: 'True', Search: list });
     const expectedActions: FetchSuccessActionType = {
-      type: 'FETCH_MOVIES_SUCCESS',
+      type: Types.FETCH_MOVIES_SUCCESS,
       list: list
     };
 
-    const store = mockStore({ list: list });
+    const store = mockStore({ list: [] });
 
-    return store.dispatch(FetchSearchList('star')).then(() => {
+    return store.dispatch(FetchSearchList('star', 1)).then(() => {
       const listOfActions = store.getActions();
       expect(listOfActions[0]).toEqual(setFetchAsLoading);
       expect(listOfActions[1]).toEqual(expectedActions);
@@ -63,21 +64,52 @@ describe('SearchList Action Unit test', function() {
     });
   });
 
-  xit('should create an action with correct type SearchList `ERROR SCENARIO`', () => {
-    mock.onGet(SEARCH_MOVIES + '&s=star').reply(400);
+  it('should create an action with correct type SearchList `ERROR SCENARIO`', () => {
+    mock.onGet(SEARCH_MOVIES).reply(400, { Response: 'False' });
 
     const expectedActions: FetchErrorActionType = {
-      type: 'FETCH_MOVIES_ERROR',
+      type: Types.FETCH_MOVIES_ERROR,
       message: ERROR_MESSAGE
     };
 
-    const store = mockStore({ list: list });
+    const store = mockStore({ list: [] });
 
-    return store.dispatch(FetchSearchList('star')).then(() => {
+    return store.dispatch(FetchSearchList('star', 2)).then(() => {
       const listOfActions = store.getActions();
       expect(listOfActions[0]).toEqual(setFetchAsLoading);
       expect(listOfActions[1]).toEqual(expectedActions);
       expect(listOfActions[2]).toEqual(setFetchAsNotLoading);
+    });
+  });
+
+  it('should create an action with correct type LoadMoreList `HAPPY SCENARIO`', () => {
+    mock.onGet(SEARCH_MOVIES).reply(200, { Response: 'True', Search: list });
+    const expectedActions: FetchSuccessActionType = {
+      type: Types.FETCH_LOAD_MORE_MOVIES_SUCCESS,
+      list: list
+    };
+
+    const store = mockStore({ list: [] });
+
+    return store.dispatch(LoadMoreSearchList('star', 2)).then(() => {
+      const listOfActions = store.getActions();
+      expect(listOfActions[0]).toEqual(expectedActions);
+    });
+  });
+
+  it('should create an action with correct type LoadMoreList `ERROR SCENARIO`', () => {
+    mock.onGet(SEARCH_MOVIES).reply(200, { Response: 'False' });
+
+    const expectedActions: FetchErrorActionType = {
+      type: Types.FETCH_LOAD_MORE_MOVIES_ERROR,
+      message: ERROR_MESSAGE
+    };
+
+    const store = mockStore({ list: [] });
+
+    return store.dispatch(LoadMoreSearchList('star', 2)).then(() => {
+      const listOfActions = store.getActions();
+      expect(listOfActions[0]).toEqual(expectedActions);
     });
   });
 });

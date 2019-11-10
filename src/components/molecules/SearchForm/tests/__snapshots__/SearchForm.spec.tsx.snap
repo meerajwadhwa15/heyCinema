@@ -13,6 +13,9 @@ exports[`SearchForm Snapshot testing Matches the snapshot 1`] = `
       type="text"
       value=""
     />
+    <p>
+      Minimum 3 characters
+    </p>
   </form>
 </div>
 `;

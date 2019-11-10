@@ -12,8 +12,8 @@ exports[`ListCard Snapshot testing Matches the snapshot 1`] = `
     <div>
       <img
         alt="title"
+        onError={[Function]}
         src="test"
-        width="200"
       />
     </div>
     <div>
