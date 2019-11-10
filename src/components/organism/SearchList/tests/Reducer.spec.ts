@@ -7,23 +7,34 @@ import {
   FetchSuccessActionType,
   ReducerAction
 } from './../type';
+import { Types } from './../Constants';
 
 const setFetchAsLoading = {
-  type: 'SET_FETCHING',
+  type: Types.SET_FETCHING,
   isFetching: true
 };
 const setFetchAsNotLoading = {
-  type: 'SET_FETCHING',
+  type: Types.SET_FETCHING,
   isFetching: false
 };
 
 const fetchSuccessAction = {
-  type: 'FETCH_MOVIES_SUCCESS',
+  type: Types.FETCH_MOVIES_SUCCESS,
   list: []
 };
 
+const fetchLoadMoreSuccessAction = {
+  type: Types.FETCH_LOAD_MORE_MOVIES_SUCCESS,
+  list: []
+};
+
+const fetchLoadMoreErrorAction = {
+  type: Types.FETCH_LOAD_MORE_MOVIES_ERROR,
+  noMoreRecords: false
+};
+
 const fetchErrorAction = {
-  type: 'FETCH_MOVIES_ERROR',
+  type: Types.FETCH_MOVIES_ERROR,
   message: ERROR_MESSAGE
 };
 
@@ -37,6 +48,21 @@ describe('SearchList Reducers Unit test', function() {
     expect(Reducers(initialState, fetchSuccessAction)).toEqual({
       ...initialState,
       list: []
+    });
+  });
+
+  test('should handle "FETCH_LOAD_MORE_MOVIES_SUCCESS" action', () => {
+    expect(Reducers(initialState, fetchLoadMoreSuccessAction)).toEqual({
+      ...initialState,
+      list: [],
+      noMoreRecords: false
+    });
+  });
+
+  test('should handle "FETCH_LOAD_MORE_MOVIES_ERROR" action', () => {
+    expect(Reducers(initialState, fetchLoadMoreErrorAction)).toEqual({
+      ...initialState,
+      noMoreRecords: true
     });
   });
 

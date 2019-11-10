@@ -8,24 +8,25 @@ export type listType = {
 
 export interface ComponentProps {}
 
-export interface ComponentState {}
+export interface ComponentState {
+  searchString: string;
+  page: number;
+}
 
 export interface ReducerState {
   list: listType[];
   isFetching: boolean;
   errorMessage: string;
+  noMoreRecords: boolean;
 }
 
 export interface DispatchProps {
-  fetchSearchListAction: (searchString: string) => void;
+  fetchSearchListAction: (searchString: string, page: number) => void;
+  loadMoreSearchListAction: (searchString: string, page: number) => void;
 }
 
 export interface SearchListReducerType {
-  SearchListReducer: {
-    list: listType[];
-    isFetching: boolean;
-    errorMessage: string;
-  };
+  SearchListReducer: ReducerState;
 }
 
 export interface ReducerAction {
@@ -49,3 +50,9 @@ export type FetchErrorActionType = {
   type: string;
   message: string;
 };
+
+export type IntersectionObserverEntryType = {
+  intersectionRatio: number;
+};
+
+export type IntersectionObserverEntriesType = IntersectionObserverEntryType[];

@@ -2,9 +2,9 @@ header.header {
   background: $secondaryBackgroundColor;
   display: flex;
   padding: 10px;
-  margin-bottom: 20px;
+  border-bottom: 1px solid $primaryBackgroundColor;
 
-  h1 > div {
+  h1>div {
     color: $primaryColor;
 
     &:last-child {

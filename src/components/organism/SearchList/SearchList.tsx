@@ -9,26 +9,32 @@ import {
   SearchListReducerType,
   ReducerState,
   DispatchProps,
-  ComponentProps
+  ComponentProps,
+  IntersectionObserverEntriesType,
+  IntersectionObserverEntryType
 } from './type';
-import { FetchSearchList } from './Action';
+import { FetchSearchList, LoadMoreSearchList } from './Action';
 import Loader from '../../molecules/Loader';
 import ErrorMessage from '../../atoms/ErrorMessage';
 import NoRecordFound from '../../atoms/NoRecordFound';
 
 export const mapStateToProps = ({
-  SearchListReducer: { list, isFetching, errorMessage }
+  SearchListReducer: { list, isFetching, errorMessage, noMoreRecords }
 }: SearchListReducerType): ReducerState => ({
   list,
   isFetching,
-  errorMessage
+  errorMessage,
+  noMoreRecords
 });
 
 export const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
-  fetchSearchListAction: (searchString: string) => {
-    dispatch(FetchSearchList(searchString));
+  fetchSearchListAction: (searchString: string, page: number) => {
+    dispatch(FetchSearchList(searchString, page));
+  },
+  loadMoreSearchListAction: (searchString: string, page: number) => {
+    dispatch(LoadMoreSearchList(searchString, page));
   }
 });
 
@@ -39,15 +45,76 @@ export class SearchList extends Component<Props, ComponentState> {
     list: []
   };
 
+  state = {
+    searchString: '',
+    page: 1
+  };
+
   handleSearch(value: string) {
     if (value) {
-      const { fetchSearchListAction } = this.props;
-      fetchSearchListAction(value);
+      this.setState(
+        {
+          searchString: value,
+          page: 1
+        },
+        () => {
+          this.fetchResults();
+        }
+      );
     }
   }
 
+  fetchResults() {
+    const { fetchSearchListAction, loadMoreSearchListAction } = this.props;
+    let { searchString, page } = this.state;
+
+    if (page > 1) {
+      loadMoreSearchListAction(searchString, page);
+    } else {
+      fetchSearchListAction(searchString, page);
+    }
+  }
+
+  componentDidMount() {
+    var loadMoreEle = document.querySelector('#loadMore');
+    if (loadMoreEle) {
+      var options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 1.0
+      };
+      try {
+        var observer = new IntersectionObserver(
+          this.handleIntersect.bind(this),
+          options
+        );
+        observer.observe(loadMoreEle);
+      } catch (e) {}
+    }
+  }
+
+  handleIntersect(entries: IntersectionObserverEntriesType) {
+    let { page } = this.state;
+    const { list } = this.props;
+
+    entries.forEach((entry: IntersectionObserverEntryType) => {
+      if (entry.intersectionRatio > 0 && list.length) {
+        // load more data
+        page += 1;
+        this.setState(
+          {
+            page
+          },
+          () => {
+            this.fetchResults();
+          }
+        );
+      }
+    });
+  }
+
   render(): ReactNode {
-    const { list, isFetching, errorMessage } = this.props;
+    const { list, isFetching, errorMessage, noMoreRecords } = this.props;
 
     return (
       <Fragment>
@@ -58,13 +125,16 @@ export class SearchList extends Component<Props, ComponentState> {
           ) : errorMessage ? (
             <ErrorMessage>{errorMessage}</ErrorMessage>
           ) : list.length ? (
-            list.map((item: listType) => (
-              <ListCard key={item.imdbID} item={item} />
+            list.map((item: listType, index: number) => (
+              <ListCard key={`list-${item.imdbID}-${index}`} item={item} />
             ))
           ) : (
             <NoRecordFound>No Record Found.</NoRecordFound>
           )}
         </div>
+        {!noMoreRecords ? (
+          <div id="loadMore">{list && list.length ? <Loader /> : null}</div>
+        ) : null}
       </Fragment>
     );
   }

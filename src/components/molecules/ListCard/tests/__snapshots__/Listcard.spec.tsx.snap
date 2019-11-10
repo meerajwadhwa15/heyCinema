@@ -13,7 +13,6 @@ exports[`ListCard Snapshot testing Matches the snapshot 1`] = `
       <img
         alt="title"
         src="test"
-        width="200"
       />
     </div>
     <div>

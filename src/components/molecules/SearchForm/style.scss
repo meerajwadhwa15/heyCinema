@@ -6,4 +6,10 @@
   input {
     padding: 8px 5px;
   }
+
+  p {
+    color: #999;
+    font-size: $smallFontSize;
+    margin-top: 5px;
+  }
 }
